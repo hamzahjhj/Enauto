@@ -1,0 +1,22 @@
+---
+- name: "Play1 : collect facts form spokes"
+  hosts: "spokes"
+  tasks:
+    - name: "task1: gather_fact"
+      ios_facts:
+        gather_subset:
+          - "all"
+      register: "facts"
+    - name: "Task2 Configure hostname"
+      ios_config:
+        src: "templates/first_temp.j2"
+        save_when: "changed"
+      register: "cli_output"
+      notify: "config_changed"
+  handlers:
+    - name: "handker1 :reveal config change"
+      listen: "config_changed"
+      debug:
+        var: "cli_output.updates"
+
+

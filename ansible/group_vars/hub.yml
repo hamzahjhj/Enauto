@@ -1,0 +1,7 @@
+---
+commands:
+  - "show ip ospf neighbor "
+  - "show ip interface brief | exclude unassigned"
+  - "show ip ospf database "
+...
+

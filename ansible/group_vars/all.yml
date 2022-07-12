@@ -1,0 +1,23 @@
+---
+#ansible_connection
+ansible_connection: "network_cli"
+ansible_network_os: "ios"
+ansible_user: "cisco"
+ansible_password: "cisco"
+ansible_become: "yes"
+ansible_become_password: "cisco"
+
+#template_name
+#template_name: "first_temp"
+template_name: "bgp_temp"
+
+data:
+        bgp:
+                ASN: 65100
+neighbors:
+        - name: CSR-1
+          ip: 1.1.1.1
+        - name: CSR-2
+          ip: 2.2.2.2
+        - name: CSR-3
+          ip: 3.3.3.3

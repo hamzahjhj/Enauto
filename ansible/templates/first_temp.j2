@@ -1,0 +1,5 @@
+{%if facts["ansible_facts"]["ansible_net_hostname"] == "CSR2" %}
+hostname CSR-2
+{%elif facts["ansible_facts"]["ansible_net_hostname"] == "ZTP-9NE51PYXUA0" %}
+hostname CSR-3
+{%endif %}

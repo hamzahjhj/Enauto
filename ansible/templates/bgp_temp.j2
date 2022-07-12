@@ -1,0 +1,18 @@
+router bgp 65100
+bgp router_ID {{facts["ansible_facts"][Loopback0"]["ipv4"]["address"]}}
+{% if facts["ansible_facts"]["ansible_net_hostname" == "CSR-1" %}
+neighbor {{facts["CSR-2"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-2"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+neighbor {{facts["CSR-3"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-3"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+{% elif facts["ansible_facts"]["ansible_net_hostname" == "CSR-2" %}
+neighbor {{facts["CSR-1"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-1"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+neighbor {{facts["CSR-3"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-3"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+{% elif facts["ansible_facts"]["ansible_net_hostname" == "CSR-3" %}
+neighbor {{facts["CSR-2"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-2"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+neighbor {{facts["CSR-1"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} remote-as {{data["bgp"]["ASN"]}}
+neighbor {{facts["CSR-1"]["ansible_facts"]["Loopback0"]["ipv4"]["address"]}} update-source  lo0
+{% endif %}

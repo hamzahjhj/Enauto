@@ -1,0 +1,11 @@
+---
+commands:
+  - "show ip ospf neighbor "
+  - "show ip interface brief | exclude unassigned"
+  - "show ip ospf interface brief"
+  - "show ip ospf database"
+hostname:
+        spoke1: "CSR-2"
+        spoke2: "CSR-3"
+...
+

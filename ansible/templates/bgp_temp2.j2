@@ -1,0 +1,12 @@
+router bgp {{data["bgp"]["ASN"]}}
+{% for item in facts["ansible_facts"]["ansible_net_interfaces"]["Loopback0"]["ipv4"] %}
+bgp router-id {{ item.address }}
+{% endfor %}
+{% for csr in neighbors %}
+   {% if facts["ansible_facts"]["ansible_net_hostname"] != csr.name %}
+       neighbor {{ csr["ip"] }} remote-as {{data["bgp"]["ASN"]}}
+       neighbor {{ csr["ip"] }} update-source lo0
+   {% endif %}
+{% endfor %}
+ 
+

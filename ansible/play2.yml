@@ -1,0 +1,22 @@
+---
+- name: "Play2 : collect facts form spokes"
+  hosts: "all"
+  tasks:
+    - name: "task1: gather_fact"
+      ios_facts:
+        gather_subset:
+          - "interfaces"
+      register: "facts"
+    - name: "Task2 Configure bgp"
+      ios_config:
+        src: "templates/bgp_temp2.j2"
+        save_when: "changed"
+      register: "cli_output"
+      notify: "config_changed"
+  handlers:
+    - name: "handker1 :reveal config change"
+      listen: "config_changed"
+      debug:
+        var: "cli_output.updates"
+
+
